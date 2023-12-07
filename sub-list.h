@@ -15,20 +15,29 @@ private:
 public:
   Subll() : size(0) {}
 
-  void pushBack() {
-    Queue<Stack<T>> newQueue;
-    elements.pushBack(newQueue);
-    ++size;
+  void pushBack(const T &value) {
+    if (size == 0 || elements.back().isFull()) {
+      Queue<Stack<T>> newQueue;
+      elements.pushBack(newQueue);
+      newQueue.enqueue(value);
+      ++size;
+    } else {
+      elements.back().enqueue(value);
+    }
   }
 
   void popFront() {
-    if (size == 0)
+    if (size == 0) {
       std::cout << "Empty" << std::endl;
-    else {
-      elements.popFront();
-      --size;
+    } else {
+      elements.front().popFront();
+
+      // Check if the first queue becomes empty, and if so, pop the entire node
+      if (elements.front().isEmpty()) {
+        elements.popFront();
+        --size;
+      }
     }
   }
 };
-
 #endif
