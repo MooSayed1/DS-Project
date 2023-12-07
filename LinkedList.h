@@ -73,7 +73,7 @@ public:
     ++size;
   }
 
-  void pushBack(int value) {
+  void pushBack(T value) {
 
     node<T> *newNode = new node<T>(value);
 
