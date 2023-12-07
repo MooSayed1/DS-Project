@@ -1,10 +1,10 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 #include <iostream>
-
-template <typename T, size_t Capacity> class Queue {
+using namespace std;
+template <typename T> class Queue {
 private:
-  T elements[Capacity];
+  T elements[4];
   size_t front;
   size_t rear;
   size_t size;
@@ -13,13 +13,13 @@ public:
   Queue() : front(0), rear(0), size(0) {}
 
   void enqueue(const T &element) {
-    if (size == Capacity) {
+    if (size == 4) {
       std::cerr << "Queue is full. Unable to enqueue." << std::endl;
       return;
     }
 
     elements[rear] = element;
-    rear = (rear + 1) % Capacity;
+    rear = (rear + 1) % 4;
     ++size;
   }
 
@@ -30,7 +30,7 @@ public:
     }
 
     T frontElement = elements[front];
-    front = (front + 1) % Capacity;
+    front = (front + 1) % 4;
     --size;
     return frontElement;
   }

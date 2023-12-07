@@ -11,6 +11,7 @@ private:
     size_t size;     
 
 public:
+    Stack():capacity(10),size(0){}
     // Constructor
     Stack(size_t capacity = 10) : capacity(capacity), size(0) {
         data = new T[capacity];

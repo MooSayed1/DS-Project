@@ -19,11 +19,21 @@ private:
   node<T> *head;
   node<T> *tail;
 
-  int size;
+  size_t size;
 
 public:
   linkedList() : size(0) {}
-
+  node<T> getHead(){
+    return head;
+  }
+  node<T> getTail()
+  {
+    return tail;
+  }
+   size_t getSize()
+   {
+     return size;
+   }
   void insert(int value) {
     node<T> *newNode = new node<T>(value);
     if (!size)
