@@ -22,7 +22,7 @@ public:
       newQueue.enqueue(value);
       ++size;
     } else {
-      elements.back().enqueue(value);
+      elements.getTail().pushBack(value);
     }
   }
 

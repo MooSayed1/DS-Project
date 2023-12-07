@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 #include <iostream>
 #include "Queue.h"
+#include "Stack.h"
 using namespace std;
 
 template <typename T> struct node {
@@ -23,10 +24,10 @@ private:
 
 public:
   linkedList() : size(0) {}
-  node<T> getHead(){
+  linkedList<T> getHead(){
     return head;
   }
-  node<T> getTail()
+  linkedList<T> getTail()
   {
     return tail;
   }
