@@ -11,6 +11,7 @@ private:
     size_t size;     
 
 public:
+    Stack():capacity(10),size(0){}
     // Constructor
     Stack(size_t capacity = 10) : capacity(capacity), size(0) {
         data = new T[capacity];
@@ -64,10 +65,6 @@ public:
         return size == 0;
     }
     
-    void resize()
-    {
-
-    }
     // Return the number of data in the stack
     size_t stackSize() const {
         return size;
