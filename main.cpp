@@ -1,22 +1,19 @@
 #include "Cake.h"
-#include "sub-list.h"
-#include "Queue.h"
+#include "Subll.h"
 #include "Stack.h"
 #include <iostream>
 using namespace std;
 
 int main() {
-  // Creating instances of the Dog class
-  Subll<Queue<Stack<int>>> wtf;
-  Queue<Stack<int>> wtf2;
-
-  wtf.pushBack(wtf2);
-
-  wtf.pushBack(wtf2);
-  wtf.pushBack(wtf2);
-  wtf.pushBack(wtf2);
-  wtf.pushBack(wtf2);
-  wtf.pushBack(wtf2);
-  cout << "WTF" << endl;
+  Subll<int>s;
+  s.push(5);
+  s.push(3);
+  s.push(8);
+  s.push(8);
+  s.push(11);
+  s.push(11);
+  s.push(11);
+  s.push(11);
+  s.print();
   return 0;
 }
