@@ -5,15 +5,16 @@
 using namespace std;
 
 int main() {
-  Subll<int>s;
-  s.push(5);
-  s.push(3);
-  s.push(8);
-  s.push(8);
-  s.push(11);
-  s.push(11);
-  s.push(11);
-  s.push(11);
-  s.print();
+  Subll<Stack<string>>s;
+  
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.push();
+  // s.print();
   return 0;
 }

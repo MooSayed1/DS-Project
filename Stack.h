@@ -65,10 +65,6 @@ public:
         return size == 0;
     }
     
-    void resize()
-    {
-
-    }
     // Return the number of data in the stack
     size_t stackSize() const {
         return size;

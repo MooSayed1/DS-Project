@@ -109,7 +109,7 @@ public:
     ++size;
   }
 
-  void pobFront() {
+  void pob() {
 
     if (size == 0)
       cout << "empty";
