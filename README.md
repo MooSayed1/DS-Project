@@ -32,6 +32,5 @@ Step-by-step guide on how to install your project.
 
 ```bash
 # Example installation commands
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
-npm install
+git clone https://github.com/Moosayed1/DS-Project.git
+cd DS-Project
