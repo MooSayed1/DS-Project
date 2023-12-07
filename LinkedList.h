@@ -1,6 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include <iostream>
+#include "Queue.h"
 using namespace std;
 
 template <typename T> struct node {
