@@ -5,7 +5,7 @@
 using namespace std;
 
 template <typename T> struct node {
-  T data[4];
+  T *data;
   node *next;
   node *prev;
   size_t front;
@@ -13,7 +13,12 @@ template <typename T> struct node {
   size_t sizeofNode;
 
   //---------------------------------------
-  node() : next(NULL), prev(NULL) {}
+
+  node() : next(nullptr), prev(nullptr), data(new T[4]), front(0), rear(0), sizeofNode(0) {}
+
+ ~node() {
+        delete[] data;
+    }
   void displayNode() {
     for (int i = 0; i < 4; ++i)
       cout << data[i] << " ";
@@ -28,13 +33,14 @@ template <typename T> struct node {
   T dequeue() {
 
     T frontElement = data[front];
+     data[front] = T();  // Assign a default-constructed value to remove the element
     front = (front + 1) % 4;
     --sizeofNode;
     return frontElement;
   }
 
   T frontElement() const {
-    if (empty()) {
+    if (isEmpty()) {
       std::cerr << "Queue is empty." << std::endl;
       throw std::out_of_range("Queue is empty");
     }
@@ -42,7 +48,7 @@ template <typename T> struct node {
     return data[front];
   }
 
-  bool empty() const { return sizeofNode == 0; }
+  bool isEmpty() const { return sizeofNode == 0; }
   bool isFull() { return sizeofNode == 4; }
 };
 
@@ -113,6 +119,8 @@ public:
 
     if (size == 0)
       cout << "empty";
+
+    // cout << "Size equal " << head->sizeofNode << endl;
     if (head->sizeofNode == 1) {
       node<T> *temp = head;
       head = head->next;
