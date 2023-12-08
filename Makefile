@@ -1,12 +1,18 @@
+CC := g++
+CFLAGS := -std=c++11 -Wall -Wextra -Werror
 
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall
+SRC := main.cpp
 
-SRC = main.cpp
-TARGET = main	
+TARGET := example
+
+LIBS := -lraylib
+
+all: $(TARGET)
 
 $(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	rm -f $(TARGET)
+
+
