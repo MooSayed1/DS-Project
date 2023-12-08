@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-  Subll<Stack<string>>s;
+  Subll<int>s;
   s.push(5);
   s.push(3);
   s.push(8);
