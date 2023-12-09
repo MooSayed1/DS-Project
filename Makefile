@@ -1,9 +1,9 @@
 CC := g++
-CFLAGS := -std=c++11 -Wall -Wextra -Werror
+CFLAGS := -std=c++11 -Wall -Wextra 
 
 SRC := main.cpp
 
-TARGET := example
+TARGET := main
 
 LIBS := -lraylib
 

@@ -1,16 +1,26 @@
 
 #ifndef CAKEFACTORY_H
 #define CAKEFACTORY_H
-#include<iostream>
 #include "Cake.h"
-#include "Subll.h"
 #include "Stack.h"
+#include "Subll.h"
+#include <iostream>
 using namespace std;
-class cakeFactory{
+class CakeFactory {
 private:
-  Subll<Stack<string>>fact;
+  Subll<Cake>watingQueue;
+  Stack<string> stk;
+  Subll<Stack<string>> fact;
 
 public:
-    // Getter function
+  // Getter function
+  CakeFactory(){}
+  void display(){fact.print();}
+  void addCake() {
+  Stack<string> stk;
+    fact.push(stk);
+    fact.addData();
+  }
+  //code
 };
-#endif // 
+#endif //

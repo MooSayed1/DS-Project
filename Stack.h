@@ -9,6 +9,7 @@ using namespace std;
 template <typename T> class Stack {
 private:
   // Cake ckobj;
+  Cake cakeObj;
   T operations[4];
   size_t size;
 
@@ -49,6 +50,10 @@ public:
     operations[0] = temp;
 
     return temp;
+  }
+  void addDatafromStack(){
+    cakeObj.addData();
+
   }
 
   // Return the top element without removing it
