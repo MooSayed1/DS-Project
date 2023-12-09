@@ -36,17 +36,7 @@ int main() {
   // }
   //
   // CloseWindow();
-
-   Stack<int>stk; 
-  stk.displayStack(); 
-  stk.addDatafromStack();
-  obj.push(stk);
-  obj.push(stk);
-  obj.push(stk);
-  obj.push(stk);
-  obj.push(stk);
-    
-  stk.displayStack();
-  obj.display();
+  CakeFactory obj;
+  obj.simulateQueue(3);
   return 0;
 }

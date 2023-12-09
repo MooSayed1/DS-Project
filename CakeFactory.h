@@ -2,14 +2,13 @@
 #ifndef CAKEFACTORY_H
 #define CAKEFACTORY_H
 #include "Cake.h"
-#include "Queue.h"
 #include "Stack.h"
 #include "Subll.h"
+#include <fstream>
 #include <iostream>
 #include <queue>
-#include <fstream>
-#include <string>
 #include <sstream>
+#include <string>
 using namespace std;
 class CakeFactory {
 
@@ -91,9 +90,7 @@ private:
 
 public:
   // Function to add a cake to the waiting queue
-  CakeFactory(){
-    loadFromFileToQueue("./dataForCakes");
-  }
+  CakeFactory() { loadFromFileToQueue("./dataForCakes.txt"); }
   void addToWaitingQueue(const Cake &cake) { waitingQueue.push(cake); }
   void loadFromFileToQueue(const std::string &filename) {
     // Assuming each line in the file represents a cake with attributes
@@ -121,6 +118,29 @@ public:
     } else {
       // Handle file not found or other errors
       std::cerr << "Unable to open file: " << filename << std::endl;
+    }
+  }
+  void simulateQueue(int numSimulations) {
+    // Check if the waiting queue has enough items to simulate
+    if (waitingQueue.size() < numSimulations) {
+      std::cerr << "Not enough items in the waiting queue for simulation."
+                << std::endl;
+      return;
+    }
+
+    // Simulate popping and pushing back into the waiting queue
+    for (int i = 0; i < numSimulations; ++i) {
+      Cake frontCake = waitingQueue.front();
+      waitingQueue.pop();
+      waitingQueue.push(frontCake);
+
+      // Print information about the simulated cake
+      std::cout << "Simulated Cake - ID: " << frontCake.getId()
+                << ", Shape: " << static_cast<int>(frontCake.getShape())
+                << ", Glazing: " << static_cast<int>(frontCake.getGlazing())
+                << ", Flavor: " << static_cast<int>(frontCake.getFlavor())
+                << ", Sprinkles: " << static_cast<int>(frontCake.getSprinkles())
+                << std::endl;
     }
   }
   // Function to get the front cake from the waiting queue
