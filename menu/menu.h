@@ -2,12 +2,6 @@
 #include <string>
 #include <vector>
 
-enum MenuOption {
-    ORDER_CAKE = 1,
-    FACTORY_SIMULATION,
-    EXIT
-};
-
 
 class Item {
 public:
@@ -69,6 +63,7 @@ inline void Menu::menu_head(std::string s) {
 inline void Menu::renderMenu() const {
     int i = 3;
     head.display(GetScreenWidth() / 2 - MeasureText(head.name.c_str(), 20) / 2, GetScreenHeight() / 20);
+
     for (const auto &entry : entries) {
         if (&entry == &entries[selected])
             entry.disp_selected(GetScreenWidth() / 2 - MeasureText(entry.name.c_str(), 20) / 2,
