@@ -14,14 +14,14 @@ template <typename T> struct node {
 
   //---------------------------------------
 
-  node() : next(nullptr), prev(nullptr), data(new T[4]), front(0), rear(0), sizeofNode(0) {}
+  node()
+      : next(nullptr), prev(nullptr), data(new T[4]), front(0), rear(0),
+        sizeofNode(0) {}
 
- ~node() {
-        delete[] data;
-    }
+  ~node() { delete[] data; }
   void displayNode() {
     for (int i = 0; i < 4; ++i)
-      cout << data[i] << " ";
+      data[i].displayStack();
   }
 
   void enqueue(T value) {
@@ -33,10 +33,16 @@ template <typename T> struct node {
   T dequeue() {
 
     T frontElement = data[front];
-     data[front] = T();  // Assign a default-constructed value to remove the element
+    data[front] =
+        T(); // Assign a default-constructed value to remove the element
     front = (front + 1) % 4;
     --sizeofNode;
     return frontElement;
+  }
+  void addDataFromsubll() {
+    // for(int i=0;i<4;++i)
+    //   data[i].addDataFromsubll();
+    data[rear].addDatafromStack();
   }
 
   T frontElement() const {
@@ -46,6 +52,9 @@ template <typename T> struct node {
     }
 
     return data[front];
+  }
+  T backElement() { 
+    return data[rear];
   }
 
   bool isEmpty() const { return sizeofNode == 0; }
@@ -75,11 +84,13 @@ public:
       }
     }
   }
-
+  void addData() {
+    tail->backElement().addDatafromStack();
+  }
   // void pushfront(int value) {
   //
   //   node<T> *newNode = new node<T>(value);
-  //
+  ///
   //   if (size == 0)
   //     head = tail = newNode;
   //
@@ -114,7 +125,6 @@ public:
     }
     ++size;
   }
-
   void pob() {
 
     if (size == 0)
