@@ -10,40 +10,29 @@
 #include <sstream>
 #include <string>
 using namespace std;
-class CakeFactory {
-
-public:
-  // Enums for cake attributes
   enum class CakeShape {
     ROUND,
     SQUARE,
     RECTANGLE,
     TRIANGLE,
-    // Add more shapes as needed
   };
 
   enum class CakeGlazing {
     CHOCOLATE,
     VANILLA,
     STRAWBERRY,
-    CARAMEL,
-    // Add more glazing options as needed
   };
 
   enum class CakeFlavor {
     CHOCOLATE,
     VANILLA,
     STRAWBERRY,
-    LEMON,
-    // Add more flavor options as needed
   };
 
   enum class CakeSprinkles {
-    NONE,
-    CHOCOLATE,
-    RAINBOW,
-    NUTS,
-    // Add more sprinkles options as needed
+    GREANLEAF,
+    HEART,
+    JELLYBEANS,
   };
 
   enum class CakeStatus {
@@ -52,6 +41,10 @@ public:
     READY,
   };
 
+
+class CakeFactory {
+
+public:
   class Cake {
   private:
     CakeShape shape;
@@ -68,16 +61,15 @@ public:
           status(CakeStatus::WAITING) {}
 
     // Default constructor
-    Cake()
+   Cake()
         : shape(CakeShape::ROUND), glazing(CakeGlazing::CHOCOLATE),
-          flavor(CakeFlavor::VANILLA), sprinkles(CakeSprinkles::NONE), id(-1),
+          flavor(CakeFlavor::VANILLA), sprinkles(CakeSprinkles::JELLYBEANS), id(-1),
           status(CakeStatus::WAITING) {}
 
     // Getter and setter functions for status
     CakeStatus getStatus() const { return status; }
     void setStatus(CakeStatus s) { status = s; }
 
-    // Getter functions for other attributes
     CakeShape getShape() const { return shape; }
     CakeGlazing getGlazing() const { return glazing; }
     CakeFlavor getFlavor() const { return flavor; }
@@ -89,9 +81,8 @@ private:
   queue<Cake> waitingQueue;
 
 public:
-  // Function to add a cake to the waiting queue
   CakeFactory() { loadFromFileToQueue("./dataForCakes.txt"); }
-  void addToWaitingQueue(const Cake &cake) { waitingQueue.push(cake); }
+  void addToWaitingQueue(CakeShape sh, CakeGlazing g, CakeFlavor f, CakeSprinkles s, int d) { waitingQueue.push(Cake(sh,g,f,s,d)); }
   void loadFromFileToQueue(const std::string &filename) {
     // Assuming each line in the file represents a cake with attributes
     // separated by spaces Example line: 1 0 2 3 1001 (id shape glazing flavor
@@ -104,19 +95,13 @@ public:
         std::istringstream iss(line);
         int id, shape, glazing, flavor, sprinkles;
         if (iss >> id >> shape >> glazing >> flavor >> sprinkles) {
-          Cake cake(static_cast<CakeShape>(shape),
-                    static_cast<CakeGlazing>(glazing),
-                    static_cast<CakeFlavor>(flavor),
-                    static_cast<CakeSprinkles>(sprinkles), id);
-          addToWaitingQueue(cake);
+          addToWaitingQueue(static_cast<CakeShape>(shape),static_cast<CakeGlazing>(glazing),static_cast<CakeFlavor>(flavor),static_cast<CakeSprinkles>(sprinkles),id);
         } else {
-          // Handle invalid line format
           std::cerr << "Invalid line format in file: " << line << std::endl;
         }
       }
       file.close();
     } else {
-      // Handle file not found or other errors
       std::cerr << "Unable to open file: " << filename << std::endl;
     }
   }
