@@ -37,6 +37,7 @@ int main() {
   //
   // CloseWindow();
   CakeFactory obj;
-  obj.simulateQueue(3);
+  // obj.loadFromFileToQueue("./dataForCakes.txt");
+  obj.simulateQueue(10);
   return 0;
 }
