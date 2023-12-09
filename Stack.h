@@ -17,10 +17,10 @@ public:
   // Stack():(10),size(0
   // Constructor
   Stack() : size(0) {
-    operations[0] = "Mixing and Batching";
-    operations[1] = "Baking";
-    operations[2] = "Decorating and Icing";
-    operations[3] = "Packaging";
+    // operations[0] = "Mixing and Batching";
+    // operations[1] = "Baking";
+    // operations[2] = "Decorating and Icing";
+    // operations[3] = "Packaging";
   }
 
   // DestructorPackaging
