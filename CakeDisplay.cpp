@@ -53,43 +53,43 @@ void simulateLoading() {
   std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
-void displayOrders(const std::vector<Cake> &orders, CakeFactory mahdi) {
-    // ... (copy the content of the original displayOrders function here)
-  size_t screenWidth = GetScreenWidth();
-  size_t screenHeight = GetScreenHeight();
-
-  SetTargetFPS(60);
-
-  // Main game loop
-  while (!WindowShouldClose()) {
-    // Update
-
-    // Draw
-    BeginDrawing();
-
-    ClearBackground(RAYWHITE);
-
-    DrawText("Cake Orders:", 20, 20, 20, DARKGRAY);
-
-    int yPos = 60; // Starting Y position for orders
-
-    for (const auto &cake : orders) {
-
-      string orderDetails =
-          "ID: " + to_string(cake.getId()) +
-          " Shape: " + mahdi.getShapeString(cake.getShape()) +
-          " Glazing: " + mahdi.getGlazingString(cake.getGlazing()) +
-          " Flavor: " + mahdi.getFlavorString(cake.getFlavor()) +
-          " Sprinkles: " + mahdi.getSprinklesString(cake.getSprinkles());
-      DrawText(orderDetails.c_str(), 20, yPos, 20, DARKGRAY);
-      yPos += 30; // Increase Y position for the next order
-    }
-
-    EndDrawing();
-
-    // Return control to the main loop
-    if (IsKeyPressed(KEY_ENTER)) {
-      break;
-    }
-  }
+// void displayOrders(const std::vector<Cake> &orders, CakeFactory mahdi) {
+//     // ... (copy the content of the original displayOrders function here)
+//   size_t screenWidth = GetScreenWidth();
+//   size_t screenHeight = GetScreenHeight();
+//
+//   SetTargetFPS(60);
+//
+//   // Main game loop
+//   while (!WindowShouldClose()) {
+//     // Update
+//
+//     // Draw
+//     BeginDrawing();
+//
+//     ClearBackground(RAYWHITE);
+//
+//     DrawText("Cake Orders:", 20, 20, 20, DARKGRAY);
+//
+//     int yPos = 60; // Starting Y position for orders
+//
+//     for (const auto &cake : orders) {
+//
+//       string orderDetails =
+//           "ID: " + to_string(cake.getId()) +
+//           " Shape: " + mahdi.getShapeString(cake.getShape()) +
+//           " Glazing: " + mahdi.getGlazingString(cake.getGlazing()) +
+//           " Flavor: " + mahdi.getFlavorString(cake.getFlavor()) +
+//           " Sprinkles: " + mahdi.getSprinklesString(cake.getSprinkles());
+//       DrawText(orderDetails.c_str(), 20, yPos, 20, DARKGRAY);
+//       yPos += 30; // Increase Y position for the next order
+//     }
+//
+//     EndDrawing();
+//
+//     // Return control to the main loop
+//     if (IsKeyPressed(KEY_ENTER)) {
+//       break;
+//     }
+//   }
 }
