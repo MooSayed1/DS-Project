@@ -37,6 +37,7 @@ inline void simulation(std::vector<Cake> v) {
     string Glazing = "Glazing: ";
     string Sprinkles = "Sprinkles: ";
 
+<<<<<<< HEAD
     if (beg > start && beg < start + v.size() + 1)
       Shape += mapOfMaps.shapeMap[v[numSections - beg].getShape()];
     if (beg > start + 1 && beg < start + v.size() + 2)
@@ -44,6 +45,15 @@ inline void simulation(std::vector<Cake> v) {
     if (beg > start + 2 && beg < start + v.size() + 3)
       Glazing += mapOfMaps.glazingMap[v[numSections - beg + 2].getGlazing()];
     if (beg > start + 3 && beg < start + v.size() + 4) {
+=======
+    if (beg > start&&beg<start + v.size()+1)
+      Shape += mapOfMaps.shapeMap[v[numSections - beg].getShape()];
+    if (beg > start + 1&&beg<start + v.size()+2)
+      Flavor += mapOfMaps.flavorMap[v[numSections - beg + 1].getFlavor()];
+    if (beg > start + 2&&beg<start + v.size()+3)
+      Glazing += mapOfMaps.glazingMap[v[numSections - beg + 2].getGlazing()];
+    if (beg > start + 3&&beg<start + v.size()+4) {
+>>>>>>> 882275c (fixed displaying)
       Sprinkles +=
           mapOfMaps.sprinklesMap[v[numSections - beg + 3].getSprinkles()];
     }
