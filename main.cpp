@@ -1,7 +1,7 @@
 #include "CakeFactory.h"
 #include "menu/menu.h"
 #include "menu/submenu.h"
-// #include "stimulation.h"
+#include "stimulation.h"
 #include <raylib.h>
 #include <unistd.h>
 #include "CakeDisplay.h"
@@ -11,12 +11,12 @@ enum MenuOption { ORDER_CAKE = 1, FACTORY_SIMULATION, DISPLAY_ORDERS, EXIT };
  
 int main() {
   LoadingScreen load;
-  load.Run();
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   size_t screenWidth = GetScreenWidth();
   size_t screenHeight = GetScreenHeight();
   InitWindow(screenWidth, screenHeight, "Raylib Menu Example");
 
+  load.Run();
   CakeFactory mahdi;
   Menu obj(screenWidth, screenHeight);
   obj.menu_head("Comfy Purble Factory");
@@ -36,19 +36,19 @@ int main() {
       if (SubMenu(ShapeInd, GlazingInd, FlavorInd, SprinkleInd)) {
         mahdi.addToWaitingQueue(ShapeInd, GlazingInd, FlavorInd, SprinkleInd,
                                 0);
-        simulateLoading();
+        // simulateLoading();
       }
       // Handle order a cake
       break;
     case FACTORY_SIMULATION:
-      // stimulation(mahdi.GiveMeCake());
+      stimulation(mahdi.GiveMeCake());
       // Handle factory stimulation
       break;
-    case DISPLAY_ORDERS:
-      // Retrieve orders and display them
-      vector<Cake> orders = mahdi.GiveMeCake();
-      displayOrders(orders,mahdi);
-      break;
+    // case DISPLAY_ORDERS:
+    //   // Retrieve orders and display them
+    //   vector<Cake> orders = mahdi.GiveMeCake();
+    //   displayOrders(orders,mahdi);
+    //   break;
     }
   }
 

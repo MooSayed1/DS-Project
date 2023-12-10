@@ -4,8 +4,7 @@
 #define LOADING_SCREEN_H
 
 #include "raylib.h"
-#include <pthread.h>
-#include <atomic>
+#include <chrono>
 
 class LoadingScreen {
 public:
@@ -15,11 +14,14 @@ public:
     void Run();
 
 private:
-    pthread_t threadId;
-    std::atomic<bool> dataLoaded;
-    std::atomic<int> dataProgress;
+    float screenWidth;
+    float screenHeight;
 
-    static void *LoadDataThread(void *arg);
+    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::duration<double> elapsedTime;
+
+    enum { STATE_WAITING, STATE_LOADING, STATE_FINISHED } state;
 };
 
 #endif // LOADING_SCREEN_H
+
