@@ -26,11 +26,10 @@ int main() {
   obj.add("Exit", EXIT);
 
   int choice = -1;
-  vector<Cake> mahdiCakes = mahdi.GiveMeCake();
 
   while (choice != EXIT) {
     choice = obj.display();
-
+  vector<Cake> mahdiCakes = mahdi.GiveMeCake();
     int ShapeInd = 0, GlazingInd = 0, FlavorInd = 0, SprinkleInd = 0;
     switch (choice) {
     case ORDER_CAKE:
