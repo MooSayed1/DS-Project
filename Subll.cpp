@@ -11,11 +11,18 @@ node<T>::~node() {
   delete[] data;
 }
 
-// template <typename T>
-// void node<T>::displayNode() {
-//   for (int i = 0; i < 4; ++i)
-//     data[i].displayStack();
-// }
+
+
+template <typename T>
+void node<T>::displayNode() {
+    static_assert(std::is_same<decltype(std::cout << std::declval<T>()), std::ostream&>::value,
+                  "T must support the << operator for std::ostream");
+
+    for (int i = 0; i < 4; ++i)
+        std::cout << data[i] << " ";
+    std::cout << std::endl;
+}
+
 
 template <typename T>
 void node<T>::enqueue(T value) {
@@ -66,23 +73,19 @@ size_t Subll<T>::getSize() {
   return size;
 }
 
-// template <typename T>
-// void Subll<T>::print() {
-//   node<T> *temp = head;
-//   if (size > 0) {
-//     while (temp) {
-//       temp->displayNode();
-//       std::cout << std::endl;
-//       temp = temp->next;
-//     }
-//   }
-// }
+template <typename T>
+void Subll<T>::print() {
+  node<T> *temp = head;
+  if (size > 0) {
+    while (temp) {
+      temp->displayNode();
+      std::cout << std::endl;
+      temp = temp->next;
+    }
+  }
+}
 
-// template <typename T>
-// void Subll<T>::addData() {
-//   tail->backElement().addDatafromStack();
-// }
-//
+
 template <typename T>
 bool Subll<T>::isEmpty() {
   return size <= 0;
@@ -118,7 +121,6 @@ T Subll<T>::pop() {
     T value = head->data[0];
     head = head->next;
     delete temp;
-    --size;
     return value;
   } else {
     return head->dequeue();
@@ -126,39 +128,9 @@ T Subll<T>::pop() {
   --size;
 }
 
-// template <typename T>
-// void Subll<T>::remove_at(int value) {
-//   node<T> *ptr = head;
-//   while (ptr->data != value && ptr) {
-//     ptr = ptr->next;
-//   }
-//
-//   if (ptr) {
-//     ptr->next->prev = ptr->prev;
-//     ptr->prev->next = ptr->next;
-//     delete (ptr);
-//     --size;
-//   }
-// }
-//
-// template <typename T>
-// void Subll<T>::remove_atIndex(int index) {
-//   node<T> *temp = head;
-//   temp = head;
-//   while (index--) {
-//     temp = temp->next;
-//   }
-//   if (temp) {
-//     temp->next->prev = temp->prev;
-//     temp->prev->next = temp->next;
-//     delete temp;
-//     --size;
-//   }
-// }
-
 // Explicit instantiation of the template class
 template class Subll<int>; // Change int to the desired type of your Subll
 template class Subll<string>; 
-template class Subll<Cake>; 
+// template class Subll<Cake>; 
 template class Subll<double>; 
 

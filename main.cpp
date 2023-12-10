@@ -16,7 +16,7 @@ int main() {
   size_t screenHeight = GetScreenHeight();
   InitWindow(screenWidth, screenHeight, "Comfy Purble Factory");
 
-  // load.Run();
+   load.Run();
   CakeFactory mahdi;
   Menu obj(screenWidth, screenHeight);
   obj.menu_head("Comfy Purble Factory");
