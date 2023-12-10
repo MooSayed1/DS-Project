@@ -28,7 +28,6 @@ struct node {
   bool isFull();
 };
 
-
 template <typename T>
 class Subll {
 public:
