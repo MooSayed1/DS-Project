@@ -2,14 +2,12 @@
 #include "menu/menu.h"
 #include "menu/submenu.h"
 // #include "stimulation.h"
-#include <chrono>
 #include <raylib.h>
-#include <thread>
 #include <unistd.h>
 #include "CakeDisplay.h"
  
 enum MenuOption { ORDER_CAKE = 1, FACTORY_SIMULATION, DISPLAY_ORDERS, EXIT };
-
+ 
 int main() {
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   size_t screenWidth = GetScreenWidth();
