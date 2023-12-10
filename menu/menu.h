@@ -22,7 +22,7 @@ inline void Item::display(int x, int y) const {
 }
 
 inline void Item::disp_selected(int x, int y) const {
-    DrawText(name.c_str(), x, y, 20, RED);
+    DrawText(name.c_str(), x, y, 25, RED);
 }
 
 inline Rectangle Item::getBoundingBox(int x, int y) const {
@@ -34,12 +34,12 @@ class Menu {
     Item head;
     std::vector<Item> entries;
     int selected;
-    int screenWidth = 800;
-    int screenHeight = 600;
+  size_t screenWidth = GetScreenWidth();
+  size_t screenHeight = GetScreenHeight();
 
 
 public:
-    Menu() : selected(0),screenWidth(800),screenHeight(600) {}
+    Menu() : selected(0),screenWidth(GetScreenWidth()),screenHeight(GetScreenHeight()) {}
     Menu(int screenWidth ,int screenHeight) : selected(0),screenWidth(screenWidth),screenHeight(screenHeight) {}
 
     void add(std::string, int);
@@ -66,7 +66,7 @@ inline void Menu::renderMenu() const {
 
     for (const auto &entry : entries) {
         if (&entry == &entries[selected])
-            entry.disp_selected(GetScreenWidth() / 2 - MeasureText(entry.name.c_str(), 20) / 2,
+            entry.disp_selected(GetScreenWidth() / 2 - MeasureText(entry.name.c_str(), 25) / 2,
                                 i * (GetScreenHeight() / 10));
         else
             entry.display(GetScreenWidth() / 2 - MeasureText(entry.name.c_str(), 20) / 2,

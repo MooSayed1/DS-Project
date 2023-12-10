@@ -51,10 +51,10 @@ public:
 
     return temp;
   }
-  void addDatafromStack(){
-    cakeObj.addData();
-
-  }
+  // void addDatafromStack(){
+  //   cakeObj.addData();
+  //
+  // }
 
   // Return the top element without removing it
   // T top() const {

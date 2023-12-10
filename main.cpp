@@ -5,7 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <raylib.h>
-
+     
 enum MenuOption { ORDER_CAKE = 1, FACTORY_SIMULATION, EXIT };
 
 void simulateLoading() {
@@ -74,7 +74,7 @@ int main() {
     case ORDER_CAKE:
       ShapeInd=0,GlazingInd=0,FlavorInd=0,SprinkleInd=0;
       if (SubMenu(ShapeInd,GlazingInd,FlavorInd,SprinkleInd)){
-        mahdi.addToWaitingQueue(static_cast<CakeShape>(ShapeInd),static_cast<CakeGlazing>(GlazingInd),static_cast<CakeFlavor>(FlavorInd),static_cast<CakeSprinkles>(SprinkleInd), 0);
+        mahdi.addToWaitingQueue(ShapeInd,GlazingInd,FlavorInd,SprinkleInd, 0);
         simulateLoading();
       }
       // Handle order a cake

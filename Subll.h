@@ -39,11 +39,11 @@ template <typename T> struct node {
     --sizeofNode;
     return frontElement;
   }
-  void addDataFromsubll() {
-    // for(int i=0;i<4;++i)
-    //   data[i].addDataFromsubll();
-    data[rear].addDatafromStack();
-  }
+  // void addDataFromsubll() {
+  //   // for(int i=0;i<4;++i)
+  //   //   data[i].addDataFromsubll();
+  //   data[rear].addDatafromStack();
+  // }
 
   T frontElement() const {
     if (isEmpty()) {
@@ -53,9 +53,7 @@ template <typename T> struct node {
 
     return data[front];
   }
-  T backElement() { 
-    return data[rear];
-  }
+  T backElement() { return data[rear]; }
 
   bool isEmpty() const { return sizeofNode == 0; }
   bool isFull() { return sizeofNode == 4; }
@@ -84,9 +82,13 @@ public:
       }
     }
   }
-  void addData() {
-    tail->backElement().addDatafromStack();
+  void addData() { tail->backElement().addDatafromStack(); }
+  bool isEmpty() {
+    if (size <= 0)
+      return true;
+    return false;
   }
+
   // void pushfront(int value) {
   //
   //   node<T> *newNode = new node<T>(value);
@@ -125,7 +127,7 @@ public:
     }
     ++size;
   }
-  void pob() {
+  T pop() {
 
     if (size == 0)
       cout << "empty";
@@ -133,10 +135,11 @@ public:
     // cout << "Size equal " << head->sizeofNode << endl;
     if (head->sizeofNode == 1) {
       node<T> *temp = head;
+      return head->data[0];
       head = head->next;
       delete temp;
     } else {
-      head->dequeue();
+      return head->dequeue();
     }
     --size;
   }

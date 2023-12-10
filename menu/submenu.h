@@ -166,8 +166,8 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
   while (!WindowShouldClose() && Saved == -1) {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    DrawText("Chose", width / 2 - MeasureText("Chose", 20) / 2.f, height / 20,
-             20, BLACK);
+    DrawText("Choose", width / 2 - MeasureText("Chose", 20) / 2.f, height / 20,
+             40, BLACK);
 
     // Draw the category titles
     DrawPreText("Cake SHAPE:", height / 4,
@@ -341,13 +341,13 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         // Update the position and size of the save option
         saveOption.rect.x = (width / 2) ;
         saveOption.rect.y = height / 10 + 550;
-        saveOption.rect.width = static_cast<float>(MeasureText("Save", 30));
+        saveOption.rect.width = static_cast<float>(MeasureText("Save", 20));
         saveOption.rect.height = 40;
 
         // Update the position and size of the cancel option
         cancelOption.rect.x = (width / 2) ;
         cancelOption.rect.y = height / 10 + 575;
-        cancelOption.rect.width = static_cast<float>(MeasureText("Cancel", 30));
+        cancelOption.rect.width = static_cast<float>(MeasureText("Cancel", 20));
         cancelOption.rect.height = 40;
     }
     EndDrawing();

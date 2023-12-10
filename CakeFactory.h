@@ -3,6 +3,7 @@
 #define CAKEFACTORY_H
 #include "Cake.h"
 // #include "Subll.h"
+#include "Subll.h"
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -15,10 +16,10 @@ private:
   queue<Cake> waitingQueue;
 
 public:
-  CakeFactory() {
-    loadFromFileToQueue("./dataForCakes.txt"); 
+  CakeFactory() { loadFromFileToQueue("./dataForCakes.txt"); }
+  void addToWaitingQueue(int sh, int g, int f, int s, int d) {
+    waitingQueue.push(Cake(sh, g, f, s, waitingQueue.size()));
   }
-  void addToWaitingQueue(CakeShape sh, CakeGlazing g, CakeFlavor f, CakeSprinkles s, int d) { waitingQueue.push(Cake(sh,g,f,s,waitingQueue.size())); }
   void loadFromFileToQueue(const std::string &filename) {
     // Assuming each line in the file represents a cake with attributes
     // separated by spaces Example line: 1 0 2 3 1001 (id shape glazing flavor
@@ -31,7 +32,7 @@ public:
         std::istringstream iss(line);
         int id, shape, glazing, flavor, sprinkles;
         if (iss >> id >> shape >> glazing >> flavor >> sprinkles) {
-          addToWaitingQueue(static_cast<CakeShape>(shape),static_cast<CakeGlazing>(glazing),static_cast<CakeFlavor>(flavor),static_cast<CakeSprinkles>(sprinkles),id);
+          addToWaitingQueue(shape, glazing, flavor, sprinkles, id);
         } else {
           std::cerr << "Invalid line format in file: " << line << std::endl;
         }
@@ -42,15 +43,12 @@ public:
     }
   }
   vector<Cake> GiveMeCake() {
-    vector<Cake>ass;
-    while(!waitingQueue.empty())
-    {
-      ass.push_back(waitingQueue.front());
-      waitingQueue.pop();
+    vector<Cake> vec;
+    while (!waitingQueue.empty()) {
+      vec.push_back(waitingQueue.front());// test it @EZZ i see you
+      vec.pop_back();
     }
-    return ass;
-
-
+    return vec;
   }
   // code
 };
