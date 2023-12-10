@@ -1,4 +1,3 @@
-
 // LoadingScreen.cpp
 #include "LoadingScreen.h"
 
@@ -60,4 +59,3 @@ void LoadingScreen::Run() {
 
     CloseWindow();
 }
-
