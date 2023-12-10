@@ -2,7 +2,7 @@
 // CakeDisplay.h
 #ifndef CAKE_DISPLAY_H
 #define CAKE_DISPLAY_H
-
+#include "Cake.h"
 #include "CakeFactory.h" // Assuming CakeFactory.h is required
 #include <vector>
 #include <raylib.h>
@@ -12,6 +12,6 @@
 #include <ctime>            // Required for: clock()
 
 void simulateLoading();
-void displayOrders(const std::vector<Cake> &orders, CakeFactory mahdi);
+void displayOrders(const std::vector<Cake> &orders);
 
 #endif // CAKE_DISPLAY_H
