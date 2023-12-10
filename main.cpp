@@ -1,8 +1,7 @@
-#include "Subll.h"
 #include "CakeFactory.h"
-#include "Stack.h"
 #include "menu/menu.h"
 #include "menu/submenu.h"
+#include "stimulation.h"
 #include <raylib.h>
 
 enum MenuOption { ORDER_CAKE = 1, FACTORY_SIMULATION, EXIT };
@@ -37,6 +36,8 @@ int main() {
 
       break;
     case FACTORY_SIMULATION:
+
+      stimulation(mahdi.GiveMeCake());
       // Handle factory stimulation
       break;
     }

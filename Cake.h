@@ -3,46 +3,70 @@
 #include <cstdio>
 #include <iostream>
 using namespace std;
-class Cake {
-private:
-  // vector<string> ingredients;
-  int shape, glazing, flavor, sprinkles, id;
+  enum class CakeShape {
+    ROUND,
+    SQUARE,
+    RECTANGLE,
+    TRIANGLE,
+  };
 
-public:
-  // Constructor
-  Cake(int sh, int g, int f, int s, int d)
-      : shape(sh), glazing(g), flavor(f), sprinkles(s), id(d) {}
+  enum class CakeGlazing {
+    CHOCOLATE,
+    VANILLA,
+    STRAWBERRY,
+  };
 
-  // Default constructor
-  Cake() : shape(-1), id(-1), glazing(-1), flavor(-1), sprinkles(-1) {}
+  enum class CakeFlavor {
+    CHOCOLATE,
+    VANILLA,
+    STRAWBERRY,
+  };
 
-  // Setter functions
-  void setShape(int sh) { shape = sh; }
-  void setGlazing(int g) { glazing = g; }
-  void setFlavor(int f) { flavor = f; }
-  void setSprinkles(int s) { sprinkles = s; }
-  void setId(int d) { id = d; }
+  enum class CakeSprinkles {
+    GREANLEAF,
+    HEART,
+    JELLYBEANS,
+  };
 
-  // Getter functions
-  int getShape() const { return shape; }
-  int getGlazing() const { return glazing; }
-  int getFlavor() const { return flavor; }
-  int getSprinkles() const { return sprinkles; }
-  int getId() const { return id; }
+  enum class CakeStatus {
+    WAITING,
+    IN_PROGRESS,
+    READY,
+  };
 
-  // Member function to display cake data
-  void displayData() const {
-    std::cout << "Cake ID: " << getId() << "\n";
-    std::cout << "Shape: " << getShape() << "\n";
-    std::cout << "Glazing: " << getGlazing() << "\n";
-    std::cout << "Flavor: " << getFlavor() << "\n";
-    std::cout << "Sprinkles: " << getSprinkles() << "\n";
-  }
-  void addData() {
-    // what you need to add yaaa AZOOZ
-    cout<<"Enter Intergers "<<endl;
-    cin >> shape;
-    cin >> glazing >> flavor >> sprinkles >> id;
-  }
-};
+
+
+
+  class Cake {
+  private:
+    CakeShape shape;
+    CakeGlazing glazing;
+    CakeFlavor flavor;
+    CakeSprinkles sprinkles;
+    int id;
+    CakeStatus status;
+
+  public:
+    // Constructor
+    Cake(CakeShape sh, CakeGlazing g, CakeFlavor f, CakeSprinkles s, int d)
+        : shape(sh), glazing(g), flavor(f), sprinkles(s), id(d),
+          status(CakeStatus::WAITING) {}
+
+    // Default constructor
+   Cake()
+        : shape(CakeShape::ROUND), glazing(CakeGlazing::CHOCOLATE),
+          flavor(CakeFlavor::VANILLA), sprinkles(CakeSprinkles::JELLYBEANS), id(-1),
+          status(CakeStatus::WAITING) {}
+
+    // Getter and setter functions for status
+    CakeStatus getStatus() const { return status; }
+    void setStatus(CakeStatus s) { status = s; }
+
+    CakeShape getShape() const { return shape; }
+    CakeGlazing getGlazing() const { return glazing; }
+    CakeFlavor getFlavor() const { return flavor; }
+    CakeSprinkles getSprinkles() const { return sprinkles; }
+    int getId() const { return id; }
+  };
+
 #endif // CAKE_H
