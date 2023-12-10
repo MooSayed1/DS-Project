@@ -2,9 +2,12 @@
 #ifndef SUBLIST_H
 #define SUBLIST_H
 
-#include "Stack.h"
 #include <iostream>
+#include <type_traits>
+// #include "Stack.h"
+// #include "Cake.h"
 
+using namespace std;
 template <typename T>
 struct node {
   T *data;
@@ -16,7 +19,7 @@ struct node {
 
   node();
   ~node();
-  // void displayNode();
+  void displayNode();
   void enqueue(T value);
   T dequeue();
   T frontElement() const;
@@ -25,17 +28,18 @@ struct node {
   bool isFull();
 };
 
+
 template <typename T>
 class Subll {
-private:
+public:
+
   node<T> *head;
   node<T> *tail;
   size_t size;
 
-public:
   Subll();
   size_t getSize();
-  // void print();
+  void print();
   // void addData();
   bool isEmpty();
   void push(T value);
