@@ -5,10 +5,13 @@
 #include <raylib.h>
 #include <unistd.h>
 #include "CakeDisplay.h"
- 
+#include "LoadingScreen.h" 
+
 enum MenuOption { ORDER_CAKE = 1, FACTORY_SIMULATION, DISPLAY_ORDERS, EXIT };
  
 int main() {
+  LoadingScreen load;
+  load.Run();
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   size_t screenWidth = GetScreenWidth();
   size_t screenHeight = GetScreenHeight();
