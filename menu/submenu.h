@@ -38,7 +38,7 @@ inline void updateResolution(float &width, float &height) {
   }
 }
 
-inline bool SubMenu(int x) {
+inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd ,int & activeSprinkleInd ) {
   float height = GetScreenHeight();
   float width = GetScreenWidth();
 
@@ -50,10 +50,6 @@ inline bool SubMenu(int x) {
   ToggleOption cancelOption;
 
   const int rows = 6;
-  int activeShapeInd = 0;
-  int activeFlavorInd = 0;
-  int activeGlazingInd = 0;
-  int activeSprinkleInd = 0;
   int selected = 0;
   int Saved = -1;
 
