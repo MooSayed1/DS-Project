@@ -3,9 +3,30 @@
 
 #include <cstdio>
 #include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
+struct cakeMap {
+
+  std::unordered_map<int, std::string> shapeMap{
+      {0, "Round"}, {1, "Square"}, {2, "Rectangle"} };
+
+  // Mapping for CakeGlazing
+  std::unordered_map<int, std::string> glazingMap{
+      {0, "Chocolate"}, {1, "Vanilla"}, {2, "Strawberry"}};
+
+  // Mapping for CakeFlavor
+  std::unordered_map<int, std::string> flavorMap{
+      {0, "Chocolate"}, {1, "Vanilla"}, {2, "Strawberry"}};
+
+  // Mapping for CakeSprinkles
+  std::unordered_map<int, std::string> sprinklesMap{
+      {0, "Greenleaf"}, {1, "Heart"}, {2, "Jellybeans"}};
+
+};
+
+  // Mapping for CakeShape
 class Cake {
 private:
     int shape;        

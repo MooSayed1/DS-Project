@@ -1,7 +1,7 @@
 CC := g++
 CFLAGS := -std=c++11 -Wall -Wextra 
 
-SRC := main.cpp CakeDisplay.cpp Subll.cpp CakeFactory.cpp LoadingScreen.cpp
+SRC := main.cpp  Subll.cpp CakeFactory.cpp LoadingScreen.cpp
 
 TARGET := main
 
