@@ -109,7 +109,6 @@ public:
     }
 
     ~CakeTable() {
-        CloseWindow();
     }
 
     void addCake(int id, int shape, int flavor, int glazing, int sprinkles) {
@@ -125,9 +124,9 @@ void drawTable() {
     for (size_t i = 0; i < cakes.size(); i++) {
         DrawText(TextFormat("%d", cakes[i].getId()), (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, RED);
         DrawText(mapOfMaps.shapeMap[cakes[i].getShape()].c_str(), 2 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, GREEN);
-        DrawText(mapOfMaps.shapeMap[cakes[i].getFlavor()].c_str(), 3 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, BLUE);
-        DrawText(mapOfMaps.shapeMap[cakes[i].getGlazing()].c_str(), 4 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, PURPLE);
-        DrawText(mapOfMaps.shapeMap[cakes[i].getSprinkles()].c_str(), 5 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, ORANGE);
+        DrawText(mapOfMaps.flavorMap[cakes[i].getFlavor()].c_str(), 3 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, BLUE);
+        DrawText(mapOfMaps.glazingMap[cakes[i].getGlazing()].c_str(), 4 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, PURPLE);
+        DrawText(mapOfMaps.sprinklesMap[cakes[i].getSprinkles()].c_str(), 5 * (screenWidth / 7.f), 40 + i * 30 - scrollY, 20, ORANGE);
     }
     DrawRectangle(0, 0, screenWidth, 30, RAYWHITE);
     // Draw table headers
@@ -171,8 +170,9 @@ void displayOrders(const std::vector<Cake> &orders) {
 
     while (!WindowShouldClose()) {
         cakeTable.drawTable();
+
         if (IsKeyPressed(KEY_ENTER)) {
-            break;
+            return;
         }
     }
 
