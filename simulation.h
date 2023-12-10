@@ -37,6 +37,7 @@ inline void simulation(std::vector<Cake> v) {
     string Glazing = "Glazing: ";
     string Sprinkles = "Sprinkles: ";
 
+<<<<<<< HEAD
     if (beg > start&&beg<start + v.size()+1)
       Shape += mapOfMaps.shapeMap[v[numSections - beg].getShape()];
     if (beg > start + 1&&beg<start + v.size()+2)
@@ -44,6 +45,15 @@ inline void simulation(std::vector<Cake> v) {
     if (beg > start + 2&&beg<start + v.size()+3)
       Glazing += mapOfMaps.glazingMap[v[numSections - beg + 2].getGlazing()];
     if (beg > start + 3&&beg<start + v.size()+4) {
+=======
+    if (beg > start && beg < start + v.size() + 1)
+      Shape += mapOfMaps.shapeMap[v[numSections - beg].getShape()];
+    if (beg > start + 1 && beg < start + v.size() + 2)
+      Flavor += mapOfMaps.flavorMap[v[numSections - beg + 1].getFlavor()];
+    if (beg > start + 2 && beg < start + v.size() + 3)
+      Glazing += mapOfMaps.glazingMap[v[numSections - beg + 2].getGlazing()];
+    if (beg > start + 3 && beg < start + v.size() + 4) {
+>>>>>>> dev1
       Sprinkles +=
           mapOfMaps.sprinklesMap[v[numSections - beg + 3].getSprinkles()];
     }
@@ -123,9 +133,9 @@ inline void simulation(std::vector<Cake> v) {
     DrawText(Glazing.c_str(), descRect.x + 20, descRect.y + 70, 20, PINK);
     DrawText(Sprinkles.c_str(), descRect.x + 20, descRect.y + 90, 20, PINK);
 
-    if (IsKeyPressed(KEY_ENTER) && beg < start + 4 + v.size()) {
+    if (IsKeyPressed(KEY_RIGHT) && beg < start + 4 + v.size()) {
       beg++;
-    } else if (IsKeyPressed(KEY_BACKSPACE) && beg > start) {
+    } else if (IsKeyPressed(KEY_LEFT) && beg > start) {
       beg--;
     } else if (IsKeyPressed(KEY_S)) {
       AutoAnim = !AutoAnim;
@@ -197,6 +207,16 @@ inline void simulation(std::vector<Cake> v) {
       beg--;
     }
 
+      DrawText("Press RIGHT ARROW to advance", 100, 150, 20, DARKGRAY);
+      DrawText("Press LEFT ARROW to go back", 100, 170, 20, DARKGRAY);
+      DrawText("Press ENTER to exit", 100, 190, 20, DARKGRAY);
+      DrawText("Press S to toggle auto-play", 100, 210, 20, DARKGRAY);
+      DrawText("Press ENTER To Exit", 100, 230, 20,
+               DARKGRAY);
+    
     EndDrawing();
+    if (IsKeyPressed(KEY_ENTER)) {
+      break;
+    }
   }
 }

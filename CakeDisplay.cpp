@@ -1,6 +1,7 @@
 
 // CakeDisplay.cpp
 #include "CakeDisplay.h"
+#include "Cake.h"
 
 void simulateLoading() {
 
@@ -53,7 +54,7 @@ void simulateLoading() {
   std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
-// void displayOrders(const std::vector<Cake> &orders, CakeFactory mahdi) {
+// void displayOrders(const std::vector<Cake> &orders) {
 //     // ... (copy the content of the original displayOrders function here)
 //   size_t screenWidth = GetScreenWidth();
 //   size_t screenHeight = GetScreenHeight();
@@ -72,15 +73,16 @@ void simulateLoading() {
 //     DrawText("Cake Orders:", 20, 20, 20, DARKGRAY);
 //
 //     int yPos = 60; // Starting Y position for orders
-//
+//     cakeMap mapOfMaps; 
 //     for (const auto &cake : orders) {
 //
 //       string orderDetails =
 //           "ID: " + to_string(cake.getId()) +
-//           " Shape: " + mahdi.getShapeString(cake.getShape()) +
-//           " Glazing: " + mahdi.getGlazingString(cake.getGlazing()) +
-//           " Flavor: " + mahdi.getFlavorString(cake.getFlavor()) +
-//           " Sprinkles: " + mahdi.getSprinklesString(cake.getSprinkles());
+//           " Shape: " + mapOfMaps.shapeMap[cake.getShape()]+
+//           " Glazing: " + mapOfMaps.glazingMap[cake.getGlazing()] +
+//           " Flavor: " +mapOfMaps.flavorMap[cake.getFlavor()] +
+//           " Sprinkles: " + mapOfMaps.sprinklesMap[cake.getSprinkles()];
+//       cout<<orderDetails<<"i'm a detail"<<endl;
 //       DrawText(orderDetails.c_str(), 20, yPos, 20, DARKGRAY);
 //       yPos += 30; // Increase Y position for the next order
 //     }
@@ -93,3 +95,55 @@ void simulateLoading() {
 //     }
 //   }
 // }
+
+
+void displayOrders(const std::vector<Cake> &orders) {
+    size_t screenWidth = GetScreenWidth();
+    size_t screenHeight = GetScreenHeight();
+
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose()) {
+        // Update
+
+        // Draw
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        DrawText("Cake Orders:", 20, 20, 20, DARKGRAY);
+
+        // Create a rectangle for all orders
+        Rectangle ordersRect = {20, 60, 500, static_cast<float>(30 * orders.size())};
+
+        // Draw a filled rectangle as the background for all orders
+        DrawRectangleRec(ordersRect, BLUE);
+
+        // Move Y position for the first order
+        int yPos = static_cast<int>(ordersRect.y + 5);
+
+        cakeMap mapOfMaps;
+
+        for (const auto &cake : orders) {
+            // Draw order details with larger font and white color
+            string orderDetails =
+                "ID: " + to_string(cake.getId()) +
+                " Shape: " + mapOfMaps.shapeMap[cake.getShape()] +
+                " Glazing: " + mapOfMaps.glazingMap[cake.getGlazing()] +
+                " Flavor: " + mapOfMaps.flavorMap[cake.getFlavor()] +
+                " Sprinkles: " + mapOfMaps.sprinklesMap[cake.getSprinkles()];
+
+            DrawText(orderDetails.c_str(), ordersRect.x + 10, yPos, 20, WHITE);
+
+            // Move Y position for the next order
+            yPos += 30; // Increase Y position and add some space between orders
+        }
+
+        EndDrawing();
+
+        // Return control to the main loop
+        if (IsKeyPressed(KEY_ENTER)) {
+            break;
+        }
+    }
+}
