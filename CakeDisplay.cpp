@@ -32,7 +32,7 @@ void simulateLoading() {
 
     // Draw loading text with larger font
     DrawText(TextFormat("%d%%", loadingPercentage), screenWidth / 2 - 30,
-             screenHeight / 2 - 50, 30, BLACK);
+             screenHeight / 2 - 30, 30, BLACK);
 
     EndDrawing();
 

@@ -4,11 +4,12 @@
 #include <string>
 #include <vector>
 
-#define SCREEN_WIDTH 600
-#define SCREEN_HEIGHT 600
+#define PLAY_SCREEN_WIDTH 600
+#define PLAY_SCREEN_HEIGHT 600
 inline void simulation(std::vector<Cake> v) {
   // Set up the window
   int numSections = 15;
+  float loadingPercentage = 0;
 
   cakeMap mapOfMaps;
   bool AutoAnim = 0;
@@ -103,17 +104,15 @@ inline void simulation(std::vector<Cake> v) {
     Rectangle descRect = {900, 250, 300, 200};
     Shape = "Shape: ";
     Flavor = "Flavor: ";
-    Glazing = "Glazing: ";
+    Glazing = "Glazing: " ;
     Sprinkles = "Sprinkles: ";
-    if (beg > start + v.size() - 6) {
+    if (beg <= start + v.size()+4&&beg>start+4 ) {
 
       Shape += mapOfMaps.shapeMap[v[numSections - beg + 4].getShape()];
       Flavor += mapOfMaps.flavorMap[v[numSections - beg + 4].getFlavor()];
-      Glazing += mapOfMaps.glazingMap[v[numSections - beg + 4].getGlazing()] +
-                 to_string(start + v.size());
+      Glazing += mapOfMaps.glazingMap[v[numSections - beg + 4].getGlazing()];
       Sprinkles +=
-          mapOfMaps.sprinklesMap[v[numSections - beg + 4].getSprinkles()] +
-          to_string(beg);
+          mapOfMaps.sprinklesMap[v[numSections - beg + 4].getSprinkles()] ;
     }
 
     DrawRectangleLinesEx(descRect, 2, BLACK);
@@ -125,8 +124,11 @@ inline void simulation(std::vector<Cake> v) {
 
     if (IsKeyPressed(KEY_RIGHT) && beg < start + 4 + v.size()) {
       beg++;
+          loadingPercentage += ((float)1/(  4 + v.size())*100); 
+
     } else if (IsKeyPressed(KEY_LEFT) && beg > start) {
       beg--;
+          loadingPercentage -= ((float)1/(  4 + v.size())*100); 
     } else if (IsKeyPressed(KEY_S)) {
       AutoAnim = !AutoAnim;
     }
@@ -141,21 +143,21 @@ inline void simulation(std::vector<Cake> v) {
     // Check if the mouse is over the play button
     bool mouseOverPlayButton = CheckCollisionPointRec(
         GetMousePosition(),
-        (Rectangle){SCREEN_WIDTH - 20, SCREEN_HEIGHT - 50, 40, 40});
+        (Rectangle){PLAY_SCREEN_WIDTH - 20, PLAY_SCREEN_HEIGHT - 50, 40, 40});
 
     // Draw play button
-    DrawRectangle(SCREEN_WIDTH - 20, SCREEN_HEIGHT - 50, 40, 40,
+    DrawRectangle(PLAY_SCREEN_WIDTH - 20, PLAY_SCREEN_HEIGHT - 50, 40, 40,
                   mouseOverPlayButton ? LIGHTGRAY : GRAY);
 
     if (AutoAnim) {
-      DrawTriangle((Vector2){SCREEN_WIDTH - 8, SCREEN_HEIGHT - 30 - 8},
-                   (Vector2){SCREEN_WIDTH - 8, SCREEN_HEIGHT - 30 + 8},
-                   (Vector2){SCREEN_WIDTH + 8, SCREEN_HEIGHT - 30},
+      DrawTriangle((Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 - 8},
+                   (Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 + 8},
+                   (Vector2){PLAY_SCREEN_WIDTH + 8, PLAY_SCREEN_HEIGHT - 30},
                    mouseOverPlayButton ? RED : MAROON);
     } else {
-      DrawTriangle((Vector2){SCREEN_WIDTH - 8, SCREEN_HEIGHT - 30 - 8},
-                   (Vector2){SCREEN_WIDTH - 8, SCREEN_HEIGHT - 30 + 8},
-                   (Vector2){SCREEN_WIDTH + 8, SCREEN_HEIGHT - 30},
+      DrawTriangle((Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 - 8},
+                   (Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 + 8},
+                   (Vector2){PLAY_SCREEN_WIDTH + 8, PLAY_SCREEN_HEIGHT - 30},
                    mouseOverPlayButton ? BLACK : DARKGRAY);
     }
 
@@ -167,34 +169,37 @@ inline void simulation(std::vector<Cake> v) {
     // Check if the mouse is over the step forward button
     bool mouseOverStepForwardButton = CheckCollisionPointRec(
         GetMousePosition(),
-        (Rectangle){SCREEN_WIDTH + 60, SCREEN_HEIGHT - 50, 40, 40});
+        (Rectangle){PLAY_SCREEN_WIDTH + 60, PLAY_SCREEN_HEIGHT - 50, 40, 40});
 
     // Draw step forward button
-    DrawRectangle(SCREEN_WIDTH + 60, SCREEN_HEIGHT - 50, 40, 40,
+    DrawRectangle(PLAY_SCREEN_WIDTH + 60, PLAY_SCREEN_HEIGHT - 50, 40, 40,
                   mouseOverStepForwardButton ? LIGHTGRAY : GRAY);
-    DrawText(">>", SCREEN_WIDTH + 70, SCREEN_HEIGHT - 40, 20,
+    DrawText(">>", PLAY_SCREEN_WIDTH + 70, PLAY_SCREEN_HEIGHT - 40, 20,
              mouseOverStepForwardButton ? RED : WHITE);
 
     // Increment frame when step forward button is clicked
     if (mouseOverStepForwardButton && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
         beg < start + 4 + v.size()) {
+                loadingPercentage += ((float)1/(  4 + v.size())*100); 
+
       beg++;
     }
 
     // Check if the mouse is over the step back button
     bool mouseOverStepBackButton = CheckCollisionPointRec(
         GetMousePosition(),
-        (Rectangle){SCREEN_WIDTH - 100, SCREEN_HEIGHT - 50, 40, 40});
+        (Rectangle){PLAY_SCREEN_WIDTH - 100, PLAY_SCREEN_HEIGHT - 50, 40, 40});
 
     // Draw step back button
-    DrawRectangle(SCREEN_WIDTH - 100, SCREEN_HEIGHT - 50, 40, 40,
+    DrawRectangle(PLAY_SCREEN_WIDTH - 100, PLAY_SCREEN_HEIGHT - 50, 40, 40,
                   mouseOverStepBackButton ? LIGHTGRAY : GRAY);
-    DrawText("<<", SCREEN_WIDTH - 90, SCREEN_HEIGHT - 40, 20,
+    DrawText("<<", PLAY_SCREEN_WIDTH - 90, PLAY_SCREEN_HEIGHT - 40, 20,
              mouseOverStepBackButton ? RED : WHITE);
 
     if (mouseOverStepBackButton && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
         beg > start) {
       beg--;
+          loadingPercentage -= ((float)1/(  4 + v.size())*100); 
     }
 
       DrawText("Press RIGHT ARROW to advance", 100, 150, 20, DARKGRAY);
@@ -204,7 +209,33 @@ inline void simulation(std::vector<Cake> v) {
       DrawText("Press ENTER To Exit", 100, 230, 20,
                DARKGRAY);
     
-    EndDrawing();
+    
+  const int totalWidth = 500;
+  size_t screenWidth = GetScreenWidth();
+  size_t screenHeight = GetScreenHeight();
+
+  int loadedWidth = static_cast<int>(totalWidth * (loadingPercentage / 100.0));
+
+
+    // ClearBackground(RAYWHITE);
+
+    // Draw loading bar outline
+    DrawRectangle((PLAY_SCREEN_WIDTH - 15) - totalWidth / 2, PLAY_SCREEN_HEIGHT + 50,
+                  totalWidth, 30, LIGHTGRAY);
+
+    // Draw loading bar progress
+    DrawRectangle((PLAY_SCREEN_WIDTH - 15) - totalWidth / 2, PLAY_SCREEN_HEIGHT + 50,
+                  loadedWidth, 30, PURPLE);
+
+    // Draw loading text with larger font
+    DrawText(TextFormat("%d%%", (int)loadingPercentage),PLAY_SCREEN_WIDTH - 20, PLAY_SCREEN_HEIGHT + 50, 30, BLACK);
+
+
+
+  // Print additional message after loading completes
+  //
+  EndDrawing();
+
     if (IsKeyPressed(KEY_ENTER)) {
       break;
     }
