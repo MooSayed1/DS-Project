@@ -7,7 +7,12 @@ CakeFactory::CakeFactory() {
 }
 
 void CakeFactory::addToWaitingQueue(int sh, int g, int f, int s, int d) {
-  waitingQueue.push_back(Cake(sh, g, f, s, waitingQueue.size()));
+  // waitingQueue.push_back(Cake(sh, g, f, s, waitingQueue.size()));
+  waitingQueue.push(Cake(sh, g, f, s, waitingQueue.getSize()));
+}
+void CakeFactory::displayWaitingSubll()
+{
+ waitingQueue.print();
 }
 void CakeFactory::loadFromFileToQueue(const std::string &filename) {
   // Assuming each line in the file represents a cake with attributes
@@ -33,5 +38,7 @@ void CakeFactory::loadFromFileToQueue(const std::string &filename) {
 }
 
 std::vector<Cake> CakeFactory::GiveMeCake() {
-  return waitingQueue;
+
+  return waitingQueue.copyToVector();
 }
+

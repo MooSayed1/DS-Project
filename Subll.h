@@ -5,7 +5,8 @@
 #include <iostream>
 #include <type_traits>
 // #include "Stack.h"
-// #include "Cake.h"
+#include <vector>
+#include "Cake.h"
 
 using namespace std;
 template <typename T>
@@ -22,6 +23,7 @@ struct node {
   void displayNode();
   void enqueue(T value);
   T dequeue();
+  T dequeueWithoutDelete();
   T frontElement() const;
   T backElement();
   bool isEmpty() const;
@@ -39,10 +41,12 @@ public:
   Subll();
   size_t getSize();
   void print();
+  vector<T>copyToVector();
   // void addData();
   bool isEmpty();
   void push(T value);
   T pop();
+  T popWithoutDelete();
   // void remove_at(int value);
   // void remove_atIndex(int index);
 };
