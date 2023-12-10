@@ -34,9 +34,9 @@ inline void simulation(std::vector<Cake> v) {
     Rectangle glazingRect = {450, 300, 100, 50};
     Rectangle sprinklesRect = {650, 300, 100, 50};
     // Add more ingredients as needed
-    string Shape = "Shape: " + to_string(start);
-    string Flavor = "Flavor: " + to_string(beg);
-    string Glazing = "Glazing: " + to_string((int)v.size());
+    string Shape = "Shape: ";
+    string Flavor = "Flavor: ";
+    string Glazing = "Glazing: ";
     string Sprinkles =
         "Sprinkles: " + to_string(beg < (start + 4 + (int)(int)v.size()));
 
@@ -86,19 +86,19 @@ inline void simulation(std::vector<Cake> v) {
     }
 
     // Print a number inside each rectangle
-    if ((int)v.size() > numSections - beg && numSections - beg > 0) {
+    if ((int)v.size() > numSections - beg && numSections - beg >= 0) {
       DrawText(std::to_string(v[numSections - beg].getId()).c_str(),
                shapeRect.x + 10, shapeRect.y + 10, 20, BLACK);
     }
-    if ((int)v.size() > numSections - beg + 1 && numSections - beg + 1 > 0) {
+    if ((int)v.size() > numSections - beg + 1 && numSections - beg + 1 >= 0) {
       DrawText(std::to_string(v[numSections - beg + 1].getId()).c_str(),
                flavorRect.x + 10, flavorRect.y + 10, 20, BLACK);
     }
-    if ((int)v.size() > numSections - beg + 2 && numSections - beg + 2 > 0) {
+    if ((int)v.size() > numSections - beg + 2 && numSections - beg + 2 >= 0) {
       DrawText(std::to_string(v[numSections - beg + 2].getId()).c_str(),
                glazingRect.x + 10, glazingRect.y + 10, 20, BLACK);
     }
-    if ((int)v.size() > numSections - beg + 3 && numSections - beg + 3 > 0) {
+    if ((int)v.size() > numSections - beg + 3 && numSections - beg + 3 >= 0) {
       DrawText(std::to_string(v[numSections - beg + 3].getId()).c_str(),
                sprinklesRect.x + 10, sprinklesRect.y + 10, 20, BLACK);
     }
@@ -209,9 +209,8 @@ inline void simulation(std::vector<Cake> v) {
 
     DrawText("Press RIGHT ARROW to advance", 100, 150, 20, DARKGRAY);
     DrawText("Press LEFT ARROW to go back", 100, 170, 20, DARKGRAY);
-    DrawText("Press ENTER to exit", 100, 190, 20, DARKGRAY);
-    DrawText("Press S to toggle auto-play", 100, 210, 20, DARKGRAY);
-    DrawText("Press ENTER To Exit", 100, 230, 20, DARKGRAY);
+    DrawText("Press S to toggle auto-play", 100, 190, 20, DARKGRAY);
+    DrawText("Press ENTER to exit", 100, 210, 20, DARKGRAY);
 
     const int totalWidth = 500;
     size_t screenWidth = GetScreenWidth();

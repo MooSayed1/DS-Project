@@ -1,36 +1,22 @@
-# DS-Project
-# Project Name
+# Comfy Purble Factory
 
-Short project description goes here.
-
-## Table of Contents
-
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-
-## Features
-
-- List key features and functionalities of your project.
-
-## Getting Started
-
-Provide instructions on setting up and installing your project.
 
 ### Prerequisites
 
-List any software or dependencies that need to be installed.
+- [Raylib](https://www.raylib.com/) - The library that made this project possible.
 
 ### Installation
 
-Step-by-step guide on how to install your project.
 
+1. Raylib Installation:
+
+   - Visit the Raylib official website for detailed installation instructions.
+   - Follow the instructions provided to download and install Raylib on your system.
 ```bash
-# Example installation commands
+#  installation commands
 git clone https://github.com/Moosayed1/DS-Project.git
 cd DS-Project
+make 
+./main
+```
+
