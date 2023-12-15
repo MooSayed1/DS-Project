@@ -1,3 +1,4 @@
+#define RAYLIB_AUDIO_IMPLEMENTATION
 #include "raylib.h"
 #include <string>
 #include <vector>
@@ -5,6 +6,7 @@
 
 class Item {
 public:
+
     std::string name;
     int ret;
 
@@ -31,16 +33,30 @@ inline Rectangle Item::getBoundingBox(int x, int y) const {
 }
 
 class Menu {
+
+  // Sound sound = LoadSound("./resources/shooting-sound-fx-159024.mp3");
     Item head;
     std::vector<Item> entries;
     int selected;
   size_t screenWidth = GetScreenWidth();
   size_t screenHeight = GetScreenHeight();
-
+    Sound sound;  // Keep the sound as a member variable
 
 public:
-    Menu() : selected(0),screenWidth(GetScreenWidth()),screenHeight(GetScreenHeight()) {}
+    Menu() : selected(0),screenWidth(GetScreenWidth()),screenHeight(GetScreenHeight()) {
+    if (IsSoundPlaying(sound)) {
+        StopSound(sound);
+        UnloadSound(sound);
+        sound=LoadSound("/home/mohamed/Desktop/projects/myProjects/DS-Project/resources/shooting-sound-fx-159024.wav");
+    }
+
+    // Load and play the new sound
+        sound=LoadSound("/home/mohamed/Desktop/projects/myProjects/DS-Project/resources/shooting-sound-fx-159024.wav");
+    }
     Menu(int screenWidth ,int screenHeight) : selected(0),screenWidth(screenWidth),screenHeight(screenHeight) {}
+    ~Menu(){
+        UnloadSound(sound);
+    }
 
     void add(std::string, int);
     void menu_head(std::string);
@@ -48,6 +64,7 @@ public:
     void renderMenu() const;
     void updateResolution();
     int checkMouseHover() const;
+    void AddSound(std::string filePath);
 };
 
 inline void Menu::add(std::string s, int r = 0) {
@@ -58,8 +75,7 @@ inline void Menu::menu_head(std::string s) {
     head.name = s;
 }
 
-
-
+// inline void Men
 inline void Menu::renderMenu() const {
     int i = 3;
     head.display(GetScreenWidth() / 2 - MeasureText(head.name.c_str(), 20) / 2, GetScreenHeight() / 20);
@@ -117,9 +133,11 @@ inline int Menu::display() {
         switch (GetKeyPressed()) {
             case KEY_DOWN:
                 selected = (selected + 1) % entries.size();
+                PlaySound(sound);
                 break;
             case KEY_UP:
                 selected = (selected + entries.size() - 1) % entries.size();
+                // AddSound("./resources/shooting-sound-fx-159024.mp3");
                 break;
             case KEY_ENTER:
                 return entries[selected].ret;
