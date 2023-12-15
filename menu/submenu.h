@@ -275,7 +275,7 @@ inline bool SubMenu(int &activeShapeInd, int &activeGlazingInd,
       PlaySound(fxPressing);
 
     } else if (IsKeyPressed(KEY_LEFT)) {
-            PlaySound(fxHovering);
+            PlaySound(fxPressing);
 
       switch (selected) {
       case 0:
