@@ -7,6 +7,7 @@
 #define PLAY_SCREEN_WIDTH 600
 #define PLAY_SCREEN_HEIGHT 600
 inline void simulation(std::vector<Cake> v) {
+  reverse(v.begin(),v.end());
   // Set up the window
   int numSections = 15;
   float loadingPercentage = 0;
@@ -29,16 +30,15 @@ inline void simulation(std::vector<Cake> v) {
     DrawText("Cakes Conveyor:", 10, 10, 20, BLACK);
 
     // Define cake ingredient positions
-    Rectangle shapeRect = {50, 300, 100, 50};
-    Rectangle flavorRect = {250, 300, 100, 50};
-    Rectangle glazingRect = {450, 300, 100, 50};
-    Rectangle sprinklesRect = {650, 300, 100, 50};
+    Rectangle shapeRect = {45, 300, 100, 50};
+    Rectangle flavorRect = {255, 300, 100, 50};
+    Rectangle glazingRect = {465, 300, 100, 50};
+    Rectangle sprinklesRect = {675, 300, 100, 50};
     // Add more ingredients as needed
     string Shape = "Shape: ";
     string Flavor = "Flavor: ";
     string Glazing = "Glazing: ";
-    string Sprinkles =
-        "Sprinkles: " + to_string(beg < (start + 4 + (int)(int)v.size()));
+    string Sprinkles = "Sprinkles: ";
 
     if (beg > start && beg < start + (int)v.size() + 1)
       Shape += mapOfMaps.shapeMap[v[numSections - beg].getShape()];
@@ -213,13 +213,9 @@ inline void simulation(std::vector<Cake> v) {
     DrawText("Press ENTER to exit", 100, 210, 20, DARKGRAY);
 
     const int totalWidth = 500;
-    size_t screenWidth = GetScreenWidth();
-    size_t screenHeight = GetScreenHeight();
 
     int loadedWidth =
         static_cast<int>(totalWidth * (loadingPercentage / 100.0));
-
-    // ClearBackground(RAYWHITE);
 
     // Draw loading bar outline
     DrawRectangle((PLAY_SCREEN_WIDTH - 15) - totalWidth / 2,
@@ -230,14 +226,14 @@ inline void simulation(std::vector<Cake> v) {
                   PLAY_SCREEN_HEIGHT + 50, loadedWidth, 30, PURPLE);
 
     // Draw loading text with larger font
-    DrawText(TextFormat("%d%%", (int)loadingPercentage), PLAY_SCREEN_WIDTH - 20,
+    DrawText(TextFormat("%d%%", (int) __builtin_roundf(loadingPercentage)), PLAY_SCREEN_WIDTH - 20,
              PLAY_SCREEN_HEIGHT + 50, 30, BLACK);
 
     // Print additional message after loading completes
     //
     EndDrawing();
 
-    if (IsKeyPressed(KEY_ENTER)) {
+    if (IsKeyPressed(KEY_ENTER)||IsKeyPressed(KEY_ESCAPE)) {
       break;
     }
   }

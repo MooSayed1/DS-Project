@@ -1,10 +1,8 @@
-// Subll.h
 #ifndef SUBLIST_H
 #define SUBLIST_H
 
 #include <iostream>
 #include <type_traits>
-// #include "Stack.h"
 #include <vector>
 #include "Cake.h"
 

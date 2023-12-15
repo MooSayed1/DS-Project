@@ -16,7 +16,9 @@ int main() {
   size_t screenHeight = GetScreenHeight();
   InitWindow(screenWidth, screenHeight, "Comfy Purble Factory");
 
-   load.Run();
+  SetExitKey(KEY_Q);
+
+  load.Run();
   CakeFactory mahdi;
   Menu obj(screenWidth, screenHeight);
   obj.menu_head("Comfy Purble Factory");
@@ -29,17 +31,15 @@ int main() {
 
   while (choice != EXIT) {
     choice = obj.display();
-  vector<Cake> mahdiCakes = mahdi.GiveMeCake();
+    vector<Cake> mahdiCakes = mahdi.GiveMeCake();
     int ShapeInd = 0, GlazingInd = 0, FlavorInd = 0, SprinkleInd = 0;
     switch (choice) {
     case ORDER_CAKE:
       ShapeInd = 0, GlazingInd = 0, FlavorInd = 0, SprinkleInd = 0;
       if (SubMenu(ShapeInd, GlazingInd, FlavorInd, SprinkleInd)) {
-        mahdi.addToWaitingQueue(ShapeInd, GlazingInd, FlavorInd, SprinkleInd,
-                                0);
+        mahdi.addToWaitingQueue(ShapeInd, GlazingInd, FlavorInd, SprinkleInd);
         simulateLoading();
       }
-      // Handle order a cake
       break;
     case FACTORY_SIMULATION:
 
@@ -48,9 +48,9 @@ int main() {
       break;
     case DISPLAY_ORDERS:
       // Retrieve orders and display them
-        // mahdi.displayWaitingSubll();
+      // mahdi.displayWaitingSubll();
       displayOrders(mahdiCakes);
-      
+
       //
       break;
     }

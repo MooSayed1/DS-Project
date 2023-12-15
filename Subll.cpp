@@ -3,7 +3,7 @@
 
 template <typename T>
 node<T>::node()
-    : next(nullptr), prev(nullptr), data(new T[4]), front(0), rear(0),
+    : data(new T[4]), next(nullptr), prev(nullptr), front(0), rear(0),
       sizeofNode(0) {}
 
 template <typename T> node<T>::~node() { delete[] data; }
@@ -32,14 +32,6 @@ template <typename T> T node<T>::dequeue() {
   return frontElement;
 }
 
-// template <typename T> T node<T>::dequeueWithoutDelete() {
-//   int temp = front;
-//   T frontElement = data[temp];
-//   // data[front] = T();
-//   temp = (temp + 1) % 4;
-//   // --sizeofNode;
-//   return frontElement;
-// }
 
 template <typename T> T node<T>::frontElement() const {
   if (isEmpty()) {
@@ -56,7 +48,7 @@ template <typename T> bool node<T>::isEmpty() const { return sizeofNode == 0; }
 template <typename T> bool node<T>::isFull() { return sizeofNode == 4; }
 
 template <typename T>
-Subll<T>::Subll() : size(0), head(nullptr), tail(nullptr) {}
+Subll<T>::Subll() : head(nullptr), tail(nullptr) ,size(0) {}
 
 template <typename T> size_t Subll<T>::getSize() { return size; }
 
@@ -121,27 +113,4 @@ template <typename T> T Subll<T>::pop() {
   }
   --size;
 }
-// template <typename T>
-//
-// T Subll<T>::popWithoutDelete() {
-//
-//   if (size == 0)
-//     std::cout << "empty";
-//
-//   if (head->sizeofNode == 1) {
-//     node<T> *temp = head;
-//     T value = head->data[0];
-//     head = head->next;
-//     // delete temp;
-//     return value;
-//   } else {
-//     return head->dequeueWithoutDelete();
-//   }
-//   --size;
-// }
-
-// Explicit instantiation of the template class
-// template class Subll<int>; // Change int to the desired type of your Subll
-// template class Subll<string>;
 template class Subll<Cake>;
-// template class Subll<double>;

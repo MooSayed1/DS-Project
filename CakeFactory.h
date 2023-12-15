@@ -19,7 +19,7 @@ private:
   Subll<Cake> waitingQueue;
 public:
   CakeFactory();
-  void addToWaitingQueue(int sh, int g, int f, int s, int d);
+  void addToWaitingQueue(int sh, int g, int f, int s);
 
   void loadFromFileToQueue(const std::string &filename);
   void displayWaitingSubll();
