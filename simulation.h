@@ -7,6 +7,7 @@
 #define PLAY_SCREEN_WIDTH 600
 #define PLAY_SCREEN_HEIGHT 600
 inline void simulation(std::vector<Cake> v) {
+
   reverse(v.begin(),v.end());
   // Set up the window
   int numSections = 15;
@@ -14,6 +15,9 @@ inline void simulation(std::vector<Cake> v) {
 
   cakeMap mapOfMaps;
 
+
+  Sound fxHovering = LoadSound("./resources/shooting-sound-fx-159024.mp3");
+  Sound fxPressing = LoadSound("./resources/notification-sound-7062.mp3");
   bool AutoAnim = 0;
   int start = std::min(numSections - (int)(int)v.size(), numSections + 4);
   int beg = start;
@@ -127,23 +131,30 @@ inline void simulation(std::vector<Cake> v) {
     if (IsKeyPressed(KEY_RIGHT) && beg < start + 4 + (int)v.size()) {
       beg++;
       loadingPercentage += ((float)1 / (4 + (int)v.size()) * 100);
+      PlaySound(fxHovering);
 
     } else if (IsKeyPressed(KEY_LEFT) && beg > start) {
       beg--;
       loadingPercentage -= ((float)1 / (4 + (int)v.size()) * 100);
+      PlaySound(fxHovering);
+
     } else if (IsKeyPressed(KEY_S)) {
       AutoAnim = !AutoAnim;
+      PlaySound(fxHovering);
+
     }
     if (AutoAnim && beg < start + 4 + (int)v.size()) {
       double currentTime = GetTime();
       double elapsedTime = currentTime - startTime;
       if (elapsedTime >= 1.0) {
         beg++;
+        PlaySound(fxHovering);
         startTime = currentTime;
         loadingPercentage += ((float)1 / (4 + (int)v.size()) * 100);
       }
     }
     // Check if the mouse is over the play button
+    
     bool mouseOverPlayButton = CheckCollisionPointRec(
         GetMousePosition(),
         (Rectangle){PLAY_SCREEN_WIDTH - 20, PLAY_SCREEN_HEIGHT - 50, 40, 40});
@@ -158,6 +169,7 @@ inline void simulation(std::vector<Cake> v) {
           (Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 + 8},
           (Vector2){PLAY_SCREEN_WIDTH + 8, PLAY_SCREEN_HEIGHT - 30},
           mouseOverPlayButton ? RED : MAROON);
+
     } else {
       DrawTriangle(
           (Vector2){PLAY_SCREEN_WIDTH - 8, PLAY_SCREEN_HEIGHT - 30 - 8},
@@ -168,6 +180,7 @@ inline void simulation(std::vector<Cake> v) {
 
     // Toggle isPlaying when the play button is clicked
     if (mouseOverPlayButton && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+      PlaySound(fxPressing);
       AutoAnim = !AutoAnim;
     }
 
@@ -186,6 +199,7 @@ inline void simulation(std::vector<Cake> v) {
     if (mouseOverStepForwardButton && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
         beg < start + 4 + (int)v.size()) {
       loadingPercentage += ((float)1 / (4 + (int)v.size()) * 100);
+      PlaySound(fxPressing);
 
       beg++;
     }
@@ -203,6 +217,7 @@ inline void simulation(std::vector<Cake> v) {
 
     if (mouseOverStepBackButton && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&
         beg > start) {
+      PlaySound(fxPressing);
       beg--;
       loadingPercentage -= ((float)1 / (4 + (int)v.size()) * 100);
     }
@@ -234,6 +249,7 @@ inline void simulation(std::vector<Cake> v) {
     EndDrawing();
 
     if (IsKeyPressed(KEY_ENTER)||IsKeyPressed(KEY_ESCAPE)) {
+      PlaySound(fxHovering);
       break;
     }
   }

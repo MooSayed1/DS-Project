@@ -313,6 +313,10 @@ inline bool SubMenu(int &activeShapeInd, int &activeGlazingInd,
         Saved = 0;
         break;
       }
+      if(IsSoundPlaying(fxPressing))
+      {
+        WaitTime(.2);
+      }
     }
     // Check if window size has changed
     if (IsWindowResized()) {
