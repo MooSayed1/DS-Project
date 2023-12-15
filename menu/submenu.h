@@ -185,12 +185,17 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
                     sprinkleOptions[0].rect.height / 2.f,
                 selected == 3);
 
+  Sound fxHovering; // Keep the sound as a member variable
+  Sound fxPressing; // Keep the sound as a member variable
+    fxHovering = LoadSound("./resources/shooting-sound-fx-159024.mp3");
+    fxPressing = LoadSound("./resources/notification-sound-7062.mp3");
     // Check for mouse clicks on shape options
     for (int i = 0; i < MAX_SHAPE_OPTIONS; i++) {
       if (CheckCollisionPointRec(GetMousePosition(), shapeOptions[i].rect)) {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeShapeInd = i;
           selected = 0;
+          PlaySound(fxHovering);
         }
       }
       DrawToggleOption(&shapeOptions[i], activeShapeInd == i);
@@ -202,6 +207,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeFlavorInd = i;
           selected = 1;
+          PlaySound(fxHovering);
         }
       }
       DrawToggleOption(&flavorOptions[i], activeFlavorInd == i);
@@ -213,6 +219,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeGlazingInd = i;
           selected = 2;
+          PlaySound(fxHovering);
         }
       }
       DrawToggleOption(&glazingOptions[i], activeGlazingInd == i);
@@ -223,6 +230,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeSprinkleInd = i;
           selected = 3;
+          PlaySound(fxHovering);
         }
       }
       DrawToggleOption(&sprinkleOptions[i], activeSprinkleInd == i);
@@ -232,6 +240,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
       if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         selected = 4;
         Saved = 1;
+          PlaySound(fxHovering);
       }
     }
     DrawToggleOption(&saveOption, selected == 4);
@@ -240,6 +249,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
       if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         selected = 5;
         Saved = 0;
+          PlaySound(fxHovering);
       }
     }
     DrawToggleOption(&cancelOption, selected == 5);
@@ -248,15 +258,19 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
       switch (selected) {
       case 0:
         activeShapeInd = (activeShapeInd + 1) % MAX_SHAPE_OPTIONS;
+          PlaySound(fxHovering);
         break;
       case 1:
         activeFlavorInd = (activeFlavorInd + 1) % MAX_FLAVOR_OPTIONS;
+          PlaySound(fxHovering);
         break;
       case 2:
         activeGlazingInd = (activeGlazingInd + 1) % MAX_GLAZING_OPTIONS;
+          PlaySound(fxHovering);
         break;
       case 3:
         activeSprinkleInd = (activeSprinkleInd + 1) % MAX_SPRINKLE_OPTIONS;
+          PlaySound(fxHovering);
         break;
       }
     } else if (IsKeyPressed(KEY_LEFT)) {
@@ -278,18 +292,24 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
                             MAX_SPRINKLE_OPTIONS;
         break;
       }
-
+      PlaySound(fxHovering);
+       
     } else if (IsKeyPressed(KEY_UP)) {
       selected = (selected + rows - 1) % rows;
+          PlaySound(fxHovering);
     } else if (IsKeyPressed(KEY_DOWN)) {
       selected = (selected + 1) % rows;
+          PlaySound(fxHovering);
     } else if (IsKeyPressed(KEY_ENTER)) {
+      PlaySound(fxPressing);
       switch (selected) {
       case 4:
         Saved = 1;
+        PlaySound(fxPressing);
         break;
       case 5:
         Saved = 0;
+        PlaySound(fxPressing);
         break;
       }
     }
@@ -351,6 +371,9 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         cancelOption.rect.height = 40;
     }
     EndDrawing();
+
+     UnloadSound(fxHovering);
+     UnloadSound(fxPressing);
   }
 
   // Unload textures for shape options
