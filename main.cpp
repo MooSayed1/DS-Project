@@ -15,7 +15,7 @@ int main() {
   size_t screenWidth = GetScreenWidth();
   size_t screenHeight = GetScreenHeight();
   InitWindow(screenWidth, screenHeight, "Comfy Purble Factory");
-
+  InitAudioDevice();      
   SetExitKey(KEY_Q);
 
   load.Run();
@@ -55,6 +55,7 @@ int main() {
       break;
     }
   }
+  CloseAudioDevice();     // Close audio device
   CloseWindow();
   return 0;
 }
