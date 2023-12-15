@@ -51,8 +51,8 @@ public:
     fxPressing = LoadSound("./resources/notification-sound-7062.mp3");
   }
   ~Menu() {
-     UnloadSound(fxHovering);
-     UnloadSound(fxPressing);
+    UnloadSound(fxHovering);
+    UnloadSound(fxPressing);
   }
 
   void add(std::string, int);
@@ -123,7 +123,8 @@ inline int Menu::display() {
 
     int hoveredItem = checkMouseHover();
     if (hoveredItem != -1) {
-      PlaySound(fxHovering);
+      if (selected!=hoveredItem)
+        PlaySound(fxHovering);
       selected = hoveredItem;
     }
 
@@ -145,11 +146,10 @@ inline int Menu::display() {
       return entries[selected].ret;
       break;
     }
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-    {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
-    PlaySound(fxPressing);
-    return entries[selected].ret;
+      PlaySound(fxPressing);
+      return entries[selected].ret;
     }
   }
 

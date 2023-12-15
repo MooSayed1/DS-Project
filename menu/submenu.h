@@ -38,9 +38,15 @@ inline void updateResolution(float &width, float &height) {
   }
 }
 
-inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd ,int & activeSprinkleInd ) {
+inline bool SubMenu(int &activeShapeInd, int &activeGlazingInd,
+                    int &activeFlavorInd, int &activeSprinkleInd) {
   float height = GetScreenHeight();
   float width = GetScreenWidth();
+
+  Sound fxHovering; // Keep the sound as a member variable
+  Sound fxPressing; // Keep the sound as a member variable
+  fxHovering = LoadSound("./resources/shooting-sound-fx-159024.mp3");
+  fxPressing = LoadSound("./resources/notification-sound-7062.mp3");
 
   ToggleOption shapeOptions[MAX_SHAPE_OPTIONS];
   ToggleOption flavorOptions[MAX_FLAVOR_OPTIONS];
@@ -153,12 +159,14 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
                   static_cast<float>(sprinkleOptions[2].image.height)};
   sprinkleOptions[2].name = "Heart";
 
-  saveOption.rect = (Rectangle){
-      width / 2, height / 10 + 525, static_cast<float>(MeasureText("Save", 20)), 40};
+  saveOption.rect =
+      (Rectangle){width / 2, height / 10 + 525,
+                  static_cast<float>(MeasureText("Save", 20)), 40};
   saveOption.name = "Save";
 
-  cancelOption.rect = (Rectangle){
-      width / 2, height / 10 + 575, static_cast<float>(MeasureText("Cancel", 20)), 40};
+  cancelOption.rect =
+      (Rectangle){width / 2, height / 10 + 575,
+                  static_cast<float>(MeasureText("Cancel", 20)), 40};
   cancelOption.name = "cancel";
 
   SetTargetFPS(60);
@@ -184,18 +192,13 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
                 sprinkleOptions[0].rect.y +
                     sprinkleOptions[0].rect.height / 2.f,
                 selected == 3);
-
-  Sound fxHovering; // Keep the sound as a member variable
-  Sound fxPressing; // Keep the sound as a member variable
-    fxHovering = LoadSound("./resources/shooting-sound-fx-159024.mp3");
-    fxPressing = LoadSound("./resources/notification-sound-7062.mp3");
     // Check for mouse clicks on shape options
     for (int i = 0; i < MAX_SHAPE_OPTIONS; i++) {
       if (CheckCollisionPointRec(GetMousePosition(), shapeOptions[i].rect)) {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeShapeInd = i;
           selected = 0;
-          PlaySound(fxHovering);
+          PlaySound(fxPressing);
         }
       }
       DrawToggleOption(&shapeOptions[i], activeShapeInd == i);
@@ -207,7 +210,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeFlavorInd = i;
           selected = 1;
-          PlaySound(fxHovering);
+          PlaySound(fxPressing);
         }
       }
       DrawToggleOption(&flavorOptions[i], activeFlavorInd == i);
@@ -219,7 +222,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeGlazingInd = i;
           selected = 2;
-          PlaySound(fxHovering);
+          PlaySound(fxPressing);
         }
       }
       DrawToggleOption(&glazingOptions[i], activeGlazingInd == i);
@@ -230,7 +233,7 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
           activeSprinkleInd = i;
           selected = 3;
-          PlaySound(fxHovering);
+          PlaySound(fxPressing);
         }
       }
       DrawToggleOption(&sprinkleOptions[i], activeSprinkleInd == i);
@@ -238,18 +241,18 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
     // Check for mouse clicks on save
     if (CheckCollisionPointRec(GetMousePosition(), saveOption.rect)) {
       if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        PlaySound(fxPressing);
         selected = 4;
         Saved = 1;
-          PlaySound(fxHovering);
       }
     }
     DrawToggleOption(&saveOption, selected == 4);
     // Check for mouse clicks on cancel
     if (CheckCollisionPointRec(GetMousePosition(), cancelOption.rect)) {
       if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        PlaySound(fxPressing);
         selected = 5;
         Saved = 0;
-          PlaySound(fxHovering);
       }
     }
     DrawToggleOption(&cancelOption, selected == 5);
@@ -258,22 +261,22 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
       switch (selected) {
       case 0:
         activeShapeInd = (activeShapeInd + 1) % MAX_SHAPE_OPTIONS;
-          PlaySound(fxHovering);
         break;
       case 1:
         activeFlavorInd = (activeFlavorInd + 1) % MAX_FLAVOR_OPTIONS;
-          PlaySound(fxHovering);
         break;
       case 2:
         activeGlazingInd = (activeGlazingInd + 1) % MAX_GLAZING_OPTIONS;
-          PlaySound(fxHovering);
         break;
       case 3:
         activeSprinkleInd = (activeSprinkleInd + 1) % MAX_SPRINKLE_OPTIONS;
-          PlaySound(fxHovering);
         break;
       }
+      PlaySound(fxPressing);
+
     } else if (IsKeyPressed(KEY_LEFT)) {
+            PlaySound(fxHovering);
+
       switch (selected) {
       case 0:
         activeShapeInd =
@@ -292,24 +295,22 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
                             MAX_SPRINKLE_OPTIONS;
         break;
       }
-      PlaySound(fxHovering);
-       
+
     } else if (IsKeyPressed(KEY_UP)) {
       selected = (selected + rows - 1) % rows;
-          PlaySound(fxHovering);
+      PlaySound(fxHovering);
     } else if (IsKeyPressed(KEY_DOWN)) {
       selected = (selected + 1) % rows;
-          PlaySound(fxHovering);
+      PlaySound(fxHovering);
     } else if (IsKeyPressed(KEY_ENTER)) {
-      PlaySound(fxPressing);
       switch (selected) {
       case 4:
-        Saved = 1;
         PlaySound(fxPressing);
+        Saved = 1;
         break;
       case 5:
-        Saved = 0;
         PlaySound(fxPressing);
+        Saved = 0;
         break;
       }
     }
@@ -357,23 +358,21 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
         sprinkleOptions[i].rect.height =
             static_cast<float>(sprinkleOptions[i].image.height);
       }
-      
-        // Update the position and size of the save option
-        saveOption.rect.x = (width / 2) ;
-        saveOption.rect.y = height / 10 + 550;
-        saveOption.rect.width = static_cast<float>(MeasureText("Save", 20));
-        saveOption.rect.height = 40;
 
-        // Update the position and size of the cancel option
-        cancelOption.rect.x = (width / 2) ;
-        cancelOption.rect.y = height / 10 + 575;
-        cancelOption.rect.width = static_cast<float>(MeasureText("Cancel", 20));
-        cancelOption.rect.height = 40;
+      // Update the position and size of the save option
+      saveOption.rect.x = (width / 2);
+      saveOption.rect.y = height / 10 + 550;
+      saveOption.rect.width = static_cast<float>(MeasureText("Save", 20));
+      saveOption.rect.height = 40;
+
+      // Update the position and size of the cancel option
+      cancelOption.rect.x = (width / 2);
+      cancelOption.rect.y = height / 10 + 575;
+      cancelOption.rect.width = static_cast<float>(MeasureText("Cancel", 20));
+      cancelOption.rect.height = 40;
     }
     EndDrawing();
 
-     UnloadSound(fxHovering);
-     UnloadSound(fxPressing);
   }
 
   // Unload textures for shape options
@@ -399,6 +398,9 @@ inline bool SubMenu(int &activeShapeInd,int&activeGlazingInd,int&activeFlavorInd
     UnloadTexture(sprinkleOptions[i].image);
     UnloadTexture(sprinkleOptions[i].activeImage);
   }
+  
+  UnloadSound(fxHovering);
+  UnloadSound(fxPressing);
   if (Saved == 1) {
     return true;
   } else {
