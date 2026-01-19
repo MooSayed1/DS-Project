@@ -4,8 +4,7 @@
 #include <cstdio>
 #include <iostream>
 #include <unordered_map>
-
-using namespace std;
+#include <string>
 
 struct cakeMap {
   std::unordered_map<int, std::string> shapeMap{
@@ -46,7 +45,7 @@ public:
   } // Default status: WAITING
 
   friend std::ostream &operator<<(std::ostream &os, const Cake &cake) {
-    cakeMap Map;
+    static cakeMap Map;
     os << "Cake ID: " << cake.getId() << std::endl;
     os << "Shape: " << Map.shapeMap[cake.getShape()] << std::endl;
     os << "Glazing: " << Map.glazingMap[cake.getGlazing()] << std::endl;
