@@ -6,7 +6,6 @@
 #include <vector>
 #include "Cake.h"
 
-using namespace std;
 template <typename T>
 struct node {
   T *data;
@@ -37,9 +36,10 @@ public:
   size_t size;
 
   Subll();
+  ~Subll();
   size_t getSize();
   void print();
-  vector<T>copyToVector();
+  std::vector<T> copyToVector();
   // void addData();
   bool isEmpty();
   void push(T value);

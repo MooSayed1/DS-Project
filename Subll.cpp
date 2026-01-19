@@ -50,6 +50,17 @@ template <typename T> bool node<T>::isFull() { return sizeofNode == 4; }
 template <typename T>
 Subll<T>::Subll() : head(nullptr), tail(nullptr) ,size(0) {}
 
+template <typename T>
+Subll<T>::~Subll() {
+    while (head) {
+        node<T>* temp = head;
+        head = head->next;
+        delete temp;
+    }
+    tail = nullptr;
+    size = 0;
+}
+
 template <typename T> size_t Subll<T>::getSize() { return size; }
 
 template <typename T> void Subll<T>::print() {
@@ -64,29 +75,29 @@ template <typename T> void Subll<T>::print() {
 }
 
 template <typename T> std::vector<T> Subll<T>::copyToVector() {
-  vector<T> returnedVecotr;
+  std::vector<T> returnedVector;
   node<T> *temp = head;
   while (temp) {
     for (int i = 0; i < 4; ++i) {
       if ((int)temp->data[i].getId() != -1)
-        returnedVecotr.push_back(temp->data[i]);
+        returnedVector.push_back(temp->data[i]);
     }
     temp = temp->next;
   }
 
-  return returnedVecotr;
+  return returnedVector;
 }
 
 template <typename T> bool Subll<T>::isEmpty() { return size <= 0; }
 
 template <typename T> void Subll<T>::push(T value) {
-  node<T> *newNode = new node<T>;
-
   if (size == 0) {
+    node<T> *newNode = new node<T>;
     head = tail = newNode;
     newNode->enqueue(value);
   } else {
     if (tail->sizeofNode == 4) {
+      node<T> *newNode = new node<T>;
       tail->next = newNode;
       newNode->prev = tail;
       tail = newNode;
@@ -99,18 +110,25 @@ template <typename T> void Subll<T>::push(T value) {
 }
 
 template <typename T> T Subll<T>::pop() {
-  if (size == 0)
-    std::cout << "empty";
-
-  if (head->sizeofNode == 1) {
-    node<T> *temp = head;
-    T value = head->data[0];
-    head = head->next;
-    delete temp;
-    return value;
-  } else {
-    return head->dequeue();
+  if (size == 0) {
+    std::cout << "empty" << std::endl;
+    return T(); // Default constructed T
   }
+
+  T value = head->dequeue();
+
+  if (head->isEmpty()) {
+      node<T> *temp = head;
+      head = head->next;
+      if (head) {
+          head->prev = nullptr;
+      } else {
+          tail = nullptr;
+      }
+      delete temp;
+  }
+
   --size;
+  return value;
 }
 template class Subll<Cake>;
